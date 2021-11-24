@@ -1,4 +1,6 @@
 package com.blp.addressbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.util.*;
@@ -7,6 +9,29 @@ import java.util.stream.Stream;
 
 public class AddressBook {
     private static final ArrayList<Contacts> list = new ArrayList<Contacts>();
+
+    public static void writeFile() throws Exception {
+        JSONArray arr = new JSONArray();
+        FileWriter writer = new FileWriter(new File("C:\\Users\\praja\\IdeaProjects\\AddressBookDay28\\JSONContact_Details"));
+        try {
+            for (Contacts c : list) {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("First Name:: ", c.getFirstName());
+                jsonObject.put("Last Name:: ", c.getLastName());
+                jsonObject.put("Email:: ", c.getEmail());
+                jsonObject.put("Address:: ", c.getAddress());
+                jsonObject.put("City :: ", c.getCity());
+                jsonObject.put("State :: ", c.getState());
+                jsonObject.put("Zip Code:: ", c.getZip());
+                jsonObject.put("Phone Number:: ", c.getPhoneNumber());
+                arr.putAll(jsonObject);
+            }
+            writer.write(String.valueOf(arr));
+            writer.close();
+        } catch (Exception e) {
+            e.getMessage();
+        }
+    }
 
     /**
      * Read CSV file for contact details.
@@ -261,6 +286,7 @@ public class AddressBook {
                         book1.AddContactsDetails();
                         writeCSVFile();
                         readCSVFile();
+                        writeFile();
                     } else if (choice == 2) {
                         book1.editContact();
                     } else if (choice == 3) {
