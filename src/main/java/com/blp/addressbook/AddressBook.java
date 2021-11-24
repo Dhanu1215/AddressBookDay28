@@ -10,6 +10,7 @@ public class AddressBook {
 
     /**
      * Read CSV file for contact details.
+     *
      * @throws IOException
      */
     public static void readCSVFile() throws Exception {
@@ -31,6 +32,7 @@ public class AddressBook {
 
     /**
      * Write CSV file for contact details.
+     *
      * @throws IOException
      */
     public static void writeCSVFile() throws IOException {
@@ -89,7 +91,6 @@ public class AddressBook {
      */
     private void sortByFirstname() {
         List<Contacts> check = list.stream().sorted(Comparator.comparing(str -> str.getFirstName())).collect(Collectors.toList());
-        ;
         check.forEach(str -> System.out.println(str.toString()));
     }
 
